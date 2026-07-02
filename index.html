@@ -6,269 +6,296 @@
 <title>TIY — Brand Strategy &amp; Messaging Guide</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600;1,700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --ink:#141414;
-    --cream:#f6f1e7;
-    --midnight:#10131f;
-    --rose:#e94f64;
-    --terminal-bg:#0b1508;
-    --terminal-green:#7dff8a;
-    --mustard:#f2b705;
-    --seafoam:#bfe8d9;
-    --bubblegum:#f7c8d8;
-    --paper:#fbf8f2;
-    --violet:#4b3bbd;
+    --bg:#ECEAE4;
+    --ink:#1c1c1c;
+    --body:#2a2a2a;
+    --accent:#e94f64;
   }
   *{margin:0;padding:0;box-sizing:border-box;}
   html,body{height:100%;overflow:hidden;}
-  body{font-family:'Poppins',sans-serif;color:var(--ink);background:var(--ink);}
+  body{font-family:'Poppins',sans-serif;color:var(--ink);background:var(--bg);}
   @media (max-height:700px){html{font-size:13px;}}
+  img{display:block;width:100%;height:auto;}
 
   .deck{position:relative;height:100dvh;width:100vw;}
   .spread{
     position:absolute;inset:0;
     display:none;
-    padding:clamp(2rem,6vw,6rem);
-    padding-bottom:clamp(6rem,12vh,9rem);
+    padding:clamp(2rem,5vw,5rem);
+    padding-bottom:clamp(6rem,12vh,8rem);
     overflow-y:auto;overflow-x:hidden;
+    background:var(--bg);
   }
   .spread.active{display:flex;flex-direction:column;justify-content:center;}
   .spread.active>*{animation:fadeUp .5s ease both;}
-  @keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:none;}}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:none;}}
 
-  /* ---- global type scale: nothing small ---- */
-  .kicker{font-size:clamp(1.1rem,1.6vw,1.5rem);font-weight:700;letter-spacing:.25em;text-transform:uppercase;}
-  .display{font-size:clamp(3.2rem,9vw,8.5rem);font-weight:900;line-height:.95;letter-spacing:-.02em;}
-  .display-md{font-size:clamp(2.2rem,min(6vw,9vh),5.5rem);font-weight:800;line-height:1.02;letter-spacing:-.015em;}
-  .body-xl{font-size:clamp(1.4rem,2.4vw,2.1rem);font-weight:400;line-height:1.45;max-width:26em;}
-  .body-lg{font-size:clamp(1.25rem,2vw,1.7rem);font-weight:400;line-height:1.5;max-width:30em;}
-  .numeral{font-weight:900;line-height:1;user-select:none;}
+  /* ---- shared type system (matches the master deck) ---- */
+  .title{
+    font-size:clamp(2.8rem,min(7vw,11vh),6.5rem);
+    font-weight:300;line-height:1.02;letter-spacing:-.045em;
+    margin-bottom:clamp(1rem,2.5vh,1.8rem);
+  }
+  .subhead{
+    font-size:clamp(1.3rem,1.9vw,1.65rem);
+    font-weight:700;font-style:italic;line-height:1.35;
+    margin-bottom:clamp(1.2rem,3vh,2rem);
+  }
+  .body-copy{font-size:clamp(1.25rem,1.55vw,1.55rem);font-weight:400;line-height:1.55;color:var(--body);}
+  .body-copy p{margin-bottom:1.2em;}
+  .body-copy p:last-child{margin-bottom:0;}
+  .body-copy strong em, .body-copy em strong{font-weight:700;}
+  .stack{line-height:1.5;}
+
+  /* ---- two-column page: text left, photo rail right ---- */
+  .cols{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,.65fr);gap:clamp(2rem,5vw,5rem);align-items:start;}
+  .rail{display:flex;flex-direction:column;gap:1.2rem;}
+  @media (max-width:840px){.cols{grid-template-columns:1fr;}.rail{flex-direction:row;flex-wrap:wrap;}.rail img{width:calc(50% - .6rem);}}
+
+  /* ---- full-width text page ---- */
+  .prose{max-width:62rem;}
+
+  /* ---- pillars ---- */
+  .pillars{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:clamp(1.5rem,3vw,3rem);margin-top:clamp(1rem,3vh,2rem);}
+  .pillar{border-top:3px solid var(--ink);padding-top:1.1rem;}
+  .pillar h3{font-size:clamp(1.5rem,2.2vw,2.1rem);font-weight:700;line-height:1.15;margin-bottom:.5rem;}
+  .pillar p{font-size:clamp(1.2rem,1.5vw,1.45rem);line-height:1.5;color:var(--body);}
+
+  /* ---- voice table ---- */
+  .voice-cols{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,4vw,4rem);margin-top:clamp(1rem,3vh,2rem);}
+  .voice-cols h3{font-size:clamp(1.4rem,2vw,1.9rem);font-weight:700;font-style:italic;margin-bottom:.8rem;}
+  .voice-cols li{font-size:clamp(1.25rem,1.55vw,1.55rem);line-height:1.6;color:var(--body);list-style:none;}
+  .voice-cols li::before{content:'—  ';}
+  @media (max-width:700px){.voice-cols{grid-template-columns:1fr;}}
+
+  /* ---- lexicon ---- */
+  .words{display:flex;flex-wrap:wrap;gap:1rem 2.2rem;margin-top:clamp(1rem,3vh,2rem);max-width:64rem;}
+  .word{font-size:clamp(1.8rem,3.4vw,3.2rem);font-weight:600;line-height:1.1;}
+  .word.no{font-weight:300;color:#8b8880;text-decoration:line-through;text-decoration-color:var(--accent);text-decoration-thickness:4px;}
+
+  /* ---- quote page ---- */
+  .quote{font-size:clamp(2rem,min(4vw,7vh),3.8rem);font-weight:300;line-height:1.25;letter-spacing:-.02em;max-width:24em;}
+  .quote::before{content:'\201C';}
+  .quote::after{content:'\201D';}
+  cite{display:block;font-style:italic;font-weight:600;font-size:clamp(1.2rem,1.6vw,1.5rem);margin-top:1.8rem;color:var(--body);}
+
+  /* ---- stat page ---- */
+  .center{align-items:center;text-align:center;}
+  .stat{font-size:clamp(6rem,min(20vw,30vh),18rem);font-weight:300;letter-spacing:-.05em;line-height:1;}
+  .stat b{font-weight:700;}
+  .footer-note{margin-top:clamp(2rem,5vh,3.5rem);font-size:clamp(1.1rem,1.4vw,1.35rem);font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#8b8880;}
+
+  /* ---- cover ---- */
+  .cover-title{
+    font-size:clamp(4rem,min(11vw,17vh),11rem);
+    font-weight:300;line-height:1;letter-spacing:-.05em;
+    margin:clamp(.8rem,2vh,1.4rem) 0;
+  }
+  .cover-kicker{font-size:clamp(1.2rem,1.6vw,1.5rem);font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:#8b8880;}
+
+  /* ---- part label (small consistent page marker) ---- */
+  .part{font-size:clamp(1.1rem,1.4vw,1.35rem);font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#8b8880;margin-bottom:clamp(.8rem,2vh,1.2rem);}
 
   /* ---- navigation ---- */
   .nav{
-    position:fixed;bottom:clamp(1.2rem,3vw,2.5rem);right:clamp(1.2rem,3vw,2.5rem);
-    display:flex;align-items:center;gap:1rem;z-index:50;
+    position:fixed;bottom:clamp(1.2rem,3vw,2.2rem);right:clamp(1.2rem,3vw,2.2rem);
+    display:flex;align-items:center;gap:.9rem;z-index:50;color:var(--ink);
   }
   .nav button{
-    width:clamp(3.4rem,5vw,4.2rem);height:clamp(3.4rem,5vw,4.2rem);
-    border-radius:50%;border:3px solid currentColor;background:transparent;
-    color:inherit;font-size:1.6rem;font-weight:700;cursor:pointer;
-    display:flex;align-items:center;justify-content:center;transition:transform .15s ease;
+    width:clamp(3.2rem,4.5vw,3.9rem);height:clamp(3.2rem,4.5vw,3.9rem);
+    border-radius:50%;border:2px solid var(--ink);background:transparent;
+    color:var(--ink);font-size:1.5rem;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;transition:all .15s ease;
     font-family:'Poppins',sans-serif;
   }
-  .nav button:hover{transform:scale(1.08);}
-  .nav button:disabled{opacity:.25;cursor:default;transform:none;}
+  .nav button:hover{background:var(--ink);color:var(--bg);}
+  .nav button:disabled{opacity:.2;cursor:default;background:transparent;color:var(--ink);}
   .counter{
-    position:fixed;bottom:clamp(1.4rem,3vw,2.7rem);left:clamp(1.2rem,3vw,2.5rem);
-    font-size:clamp(1.1rem,1.5vw,1.4rem);font-weight:700;letter-spacing:.15em;z-index:50;
+    position:fixed;bottom:clamp(1.5rem,3vw,2.4rem);left:clamp(1.2rem,3vw,2.2rem);
+    font-size:clamp(1.05rem,1.3vw,1.25rem);font-weight:600;letter-spacing:.15em;z-index:50;color:var(--ink);
   }
-  .progress{
-    position:fixed;top:0;left:0;height:6px;background:currentColor;z-index:60;
-    transition:width .4s ease;
-  }
-
-  /* ================= 01 · HERO COVER ================= */
-  .s01{background:var(--cream);color:var(--ink);}
-  .s01 .numeral{
-    position:absolute;top:0;right:0;font-size:clamp(12rem,26vw,26rem);
-    color:transparent;-webkit-text-stroke:3px var(--ink);opacity:.12;
-    animation:none !important;
-  }
-  .s01 .title{font-size:clamp(3rem,min(9.5vw,14vh),9.5rem);font-weight:900;line-height:.92;letter-spacing:-.03em;}
-  .s01 .title em{font-style:italic;font-weight:300;}
-  .s01 .rule{width:clamp(8rem,20vw,18rem);height:8px;background:var(--rose);margin:1.75rem 0;}
-
-  /* ================= 02 · MIDNIGHT / ORIGIN ================= */
-  .s02{background:var(--midnight);color:var(--cream);}
-  .s02 .numeral{font-size:clamp(6rem,min(18vw,18vh),16rem);color:var(--rose);margin-bottom:1rem;}
-  .s02 .display-md em{color:var(--rose);font-style:normal;}
-
-  /* ================= 03 · ROSE ALERT STAMP ================= */
-  .s03{background:var(--rose);color:#fff;align-items:center;text-align:center;}
-  .s03 .stamp{
-    display:inline-block;border:6px solid #fff;padding:1rem 3rem;
-    transform:rotate(-4deg);font-size:clamp(1.4rem,2.4vw,2.2rem);
-    font-weight:800;letter-spacing:.3em;text-transform:uppercase;margin-bottom:3rem;
-  }
-  .s03 .body-xl{margin:0 auto;}
-  .s03 .numeral{
-    position:absolute;bottom:-2rem;right:0;font-size:clamp(10rem,22vw,22rem);
-    color:transparent;-webkit-text-stroke:3px rgba(255,255,255,.25);
-    animation:none !important;
-  }
-
-  /* ================= 04 · SPLIT PANEL / AUDIENCE ================= */
-  .s04{background:var(--violet);color:#fff;padding:0;}
-  .s04 .cols{display:grid;grid-template-columns:1fr 1fr;min-height:100%;}
-  .s04 .col{padding:clamp(2rem,5vw,5rem);display:flex;flex-direction:column;justify-content:center;}
-  .s04 .col.b{background:var(--cream);color:var(--ink);}
-  .s04 .numeral{font-size:clamp(6rem,12vw,11rem);opacity:.9;}
-  @media(max-width:760px){.s04 .cols{grid-template-columns:1fr;}}
-
-  /* ================= 05 · MUSTARD PILLARS ================= */
-  .s05{background:var(--mustard);color:var(--ink);}
-  .s05 .pillars{display:grid;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));gap:2rem;margin-top:3rem;}
-  .s05 .pillar{border-top:8px solid var(--ink);padding-top:1.2rem;}
-  .s05 .pillar h3{font-size:clamp(1.7rem,2.8vw,2.6rem);font-weight:800;line-height:1.1;margin-bottom:.6rem;}
-  .s05 .pillar p{font-size:clamp(1.2rem,1.7vw,1.5rem);line-height:1.45;}
-  .s05 .numeral{font-size:clamp(5rem,10vw,9rem);}
-
-  /* ================= 06 · TERMINAL / VOICE ================= */
-  .s06{background:var(--terminal-bg);color:var(--terminal-green);font-family:'JetBrains Mono',monospace;}
-  .s06 .prompt::before{content:'> ';}
-  .s06 .line{font-size:clamp(1.4rem,2.6vw,2.3rem);font-weight:700;line-height:1.7;}
-  .s06 .big{font-size:clamp(2.6rem,6.5vw,6rem);font-weight:700;line-height:1.05;margin:1.5rem 0;}
-  .s06 .cursor{display:inline-block;width:.6em;height:1.1em;background:var(--terminal-green);vertical-align:text-bottom;animation:blink 1s steps(1) infinite;}
-  @keyframes blink{50%{opacity:0;}}
-  .s06 .kicker{font-family:'JetBrains Mono',monospace;}
-
-  /* ================= 07 · ACADEMIC DROP CAP ================= */
-  .s07{background:var(--paper);color:var(--ink);}
-  .s07 .dropcap-block{columns:1;max-width:60rem;}
-  .s07 .dropcap-block p{font-size:clamp(1.4rem,2.2vw,1.9rem);line-height:1.6;}
-  .s07 .dropcap-block p:first-of-type::first-letter{
-    font-size:clamp(6rem,12vw,10rem);font-weight:900;float:left;
-    line-height:.8;padding-right:1.4rem;color:var(--rose);
-  }
-  .s07 .numeral{font-size:clamp(4rem,8vw,7rem);color:var(--rose);}
-  .s07 hr{border:none;border-top:4px double var(--ink);margin:2rem 0;max-width:60rem;}
-
-  /* ================= 08 · LEXICON / BUBBLEGUM ================= */
-  .s08{background:var(--bubblegum);color:var(--ink);}
-  .s08 .words{display:flex;flex-wrap:wrap;gap:1.2rem 2rem;margin-top:2.5rem;max-width:70rem;}
-  .s08 .word{font-size:clamp(2rem,4.5vw,4rem);font-weight:800;line-height:1;}
-  .s08 .word.no{color:transparent;-webkit-text-stroke:2px var(--ink);text-decoration:line-through;text-decoration-color:var(--rose);text-decoration-thickness:6px;}
-  .s08 .numeral{font-size:clamp(5rem,10vw,9rem);color:#fff;}
-
-  /* ================= 09 · SEAFOAM PROOF ================= */
-  .s09{background:var(--seafoam);color:var(--ink);}
-  .s09 blockquote{font-size:clamp(2rem,4.5vw,4rem);font-weight:700;line-height:1.2;max-width:22em;}
-  .s09 blockquote::before{content:'“';color:var(--rose);}
-  .s09 blockquote::after{content:'”';color:var(--rose);}
-  .s09 cite{display:block;font-style:normal;font-size:clamp(1.2rem,1.8vw,1.6rem);font-weight:600;margin-top:2rem;letter-spacing:.1em;text-transform:uppercase;}
-  .s09 .numeral{font-size:clamp(5rem,10vw,9rem);opacity:.35;}
-
-  /* ================= 10 · BIG STAT FINISH ================= */
-  .s10{background:var(--ink);color:var(--cream);align-items:center;text-align:center;}
-  .s10 .stat{font-size:clamp(6rem,min(22vw,32vh),22rem);font-weight:900;line-height:.9;color:var(--mustard);letter-spacing:-.04em;}
-  .s10 .body-xl{margin:2rem auto 0;}
-  .s10 .footer-note{margin-top:4rem;font-size:clamp(1.1rem,1.5vw,1.4rem);font-weight:600;letter-spacing:.2em;text-transform:uppercase;opacity:.7;}
+  .progress{position:fixed;top:0;left:0;height:4px;background:var(--ink);z-index:60;transition:width .4s ease;}
 </style>
 </head>
 <body>
 <div class="deck" id="deck">
 
-  <!-- 01 · HERO COVER -->
-  <section class="spread s01" data-theme-color="#141414">
-    <div class="numeral">01</div>
-    <p class="kicker">Brand Strategy &amp; Messaging Guide</p>
-    <h1 class="title">TIY<br><em>tie it</em><br>YOURSELF.</h1>
-    <div class="rule"></div>
-    <p class="body-xl">[Placeholder — one-line framing of what this guide is and who it's for. Prepared for TIY Products, Austin, Texas.]</p>
+  <!-- 01 · COVER -->
+  <section class="spread">
+    <p class="cover-kicker">Brand Strategy &amp; Messaging Guide</p>
+    <h1 class="cover-title">The Perfect<br>Brand.</h1>
+    <p class="subhead">tiy — Tie It Yourself</p>
+    <p class="body-copy" style="max-width:34em;">[Placeholder — one-line framing of what this guide is and who it's for. Prepared for TIY Products, Austin, Texas.]</p>
   </section>
 
-  <!-- 02 · MIDNIGHT ORIGIN -->
-  <section class="spread s02" data-theme-color="#f6f1e7">
-    <div class="numeral">02</div>
-    <p class="kicker">The Story</p>
-    <h2 class="display-md">[Placeholder header — <em>the origin story</em>, the problem worth solving, why TIY exists.]</h2>
-    <p class="body-lg" style="margin-top:2rem;">[Placeholder — 2–3 sentences of origin narrative. The founding insight, the moment of frustration with the disposable hair tie, the Austin roots.]</p>
-  </section>
-
-  <!-- 03 · ROSE ALERT STAMP -->
-  <section class="spread s03" data-theme-color="#ffffff">
-    <div class="numeral">03</div>
-    <div><span class="stamp">Positioning</span></div>
-    <h2 class="display-md">[Placeholder — the one-sentence positioning statement lives here, huge.]</h2>
-    <p class="body-xl" style="margin-top:2.5rem;">[Placeholder — for whom, against what, and the single reason to believe.]</p>
-  </section>
-
-  <!-- 04 · SPLIT PANEL AUDIENCE -->
-  <section class="spread s04" data-theme-color="#ffffff">
+  <!-- 02 · ORIGIN STORY 1/3 -->
+  <section class="spread">
     <div class="cols">
-      <div class="col">
-        <div class="numeral">04</div>
-        <p class="kicker">Who She Is</p>
-        <h2 class="display-md" style="margin-top:1rem;">[Audience headline]</h2>
+      <div>
+        <h1 class="title">The Origin Story</h1>
+        <p class="subhead">A wasted year, a trip to Walgreens and an envelope in a glovebox.</p>
+        <div class="body-copy">
+          <p class="stack">25 years.<br>Hundreds of players.<br>Thousands of practices.<br>Millions of minutes.</p>
+          <p>Jerritt Elliott is widely known as one of the best college volleyball coaches of all-time. Like all great coaches, he strives for efficiency and despises wasted motion and wasted time.</p>
+          <p>While running his practices, Jerritt noticed something. His players often had to stop to adjust their hair. When he calculated the time wasted, it added up to over a year of lost time.</p>
+          <p>It frustrated Jerritt so much that after one practice, he drove straight to Walgreens and bought a bag of hair ties. He needed to understand why they didn't work.</p>
+        </div>
       </div>
-      <div class="col b">
-        <p class="body-lg">[Placeholder — audience portrait. What she values, where she is (the studio, the field, the office), what she's tired of, what she notices.]</p>
+      <div class="rail">
+        <img src="img/origin-coach-yell.jpg" alt="Jerritt Elliott coaching courtside">
+        <img src="img/origin-spike.jpg" alt="Texas volleyball player attacking at the net">
+        <img src="img/origin-coach-stand.jpg" alt="Jerritt Elliott on the sideline">
       </div>
     </div>
   </section>
 
-  <!-- 05 · MUSTARD PILLARS -->
-  <section class="spread s05" data-theme-color="#141414">
-    <div class="numeral">05</div>
-    <p class="kicker">Brand Pillars</p>
-    <div class="pillars">
-      <div class="pillar"><h3>[Pillar one]</h3><p>[Placeholder — what it means and how it shows up.]</p></div>
-      <div class="pillar"><h3>[Pillar two]</h3><p>[Placeholder — what it means and how it shows up.]</p></div>
-      <div class="pillar"><h3>[Pillar three]</h3><p>[Placeholder — what it means and how it shows up.]</p></div>
+  <!-- 03 · ORIGIN STORY 2/3 -->
+  <section class="spread">
+    <div class="cols">
+      <div>
+        <h1 class="title">The Origin Story</h1>
+        <div class="body-copy">
+          <p>At Walgreens, he bought a bag of 30 'drugstore' hair ties. The hair tie all his players used. The one that didn't work.</p>
+          <p>Like a mad scientist, he stretched them, cut them, pulled them apart and put them back together.</p>
+          <p>Like any great inventor, Jerritt envisioned a better hair tie...how it would work, how it would feel and what it would look like.</p>
+          <p>After many months of tinkering and trials, he had developed the first version of TIY. He lent one to his girlfriend at the time, pro volleyball player Andrea Nucete. She put the envelope of hair ties in the glovebox of her car.</p>
+          <p>Even she was skeptical. <strong><em>"Why would I tie my own hair tie? What is the benefit? I don't trust the bald guy."</em></strong></p>
+        </div>
+      </div>
+      <div class="rail">
+        <img src="img/origin-beach.jpg" alt="Andrea Nucete diving for a ball on the beach">
+        <img src="img/origin-quote.jpg" alt="Andrea and Jerritt — 'I don't trust the bald guy' quote">
+      </div>
     </div>
   </section>
 
-  <!-- 06 · TERMINAL VOICE -->
-  <section class="spread s06" data-theme-color="#7dff8a">
-    <p class="kicker prompt">spread_06 / voice_and_tone</p>
-    <p class="big">[Placeholder — the voice in one line. How TIY sounds when it speaks.]</p>
-    <p class="line prompt">we_are: [confident / playful / warm]</p>
-    <p class="line prompt">we_are_not: [precious / preachy / corporate]</p>
-    <p class="line prompt">say_it_like: "[placeholder example sentence]"</p>
-    <p class="line">&nbsp;<span class="cursor"></span></p>
-  </section>
-
-  <!-- 07 · ACADEMIC DROP CAP -->
-  <section class="spread s07" data-theme-color="#141414">
-    <div class="numeral">07</div>
-    <p class="kicker">Messaging Hierarchy</p>
-    <hr>
-    <div class="dropcap-block">
-      <p>Placeholder — lead paragraph explaining the message architecture: the master message, then supporting messages by audience or moment. The first letter of this paragraph becomes the drop cap, so start it with a strong word.</p>
-      <p style="margin-top:1.5rem;">[Placeholder — second paragraph: how the messages ladder up, and when to use which.]</p>
+  <!-- 04 · ORIGIN STORY 3/3 -->
+  <section class="spread">
+    <div class="cols">
+      <div>
+        <h1 class="title">The Origin Story</h1>
+        <div class="body-copy">
+          <p>Until she was driving to a tournament in Houston and both of her 'drugstore' hair ties snapped.</p>
+          <p>She remembered the envelope in her glovebox that contained Jerritt's invention.</p>
+          <p>Out of necessity, she tried it. And immediately, she "got it."</p>
+          <p>It wasn't just <strong><em>better</em></strong>, it was <strong><em>beautiful</em></strong>. Function <strong><em>and</em></strong> fashion. It kept her hair in place during a tough match and the colors happened to match her outfit.</p>
+          <p>Today, Jerritt and Andrea Nucete-Elliott are married and Andrea is the CEO of TIY.</p>
+          <p>The company has grown to sell millions of hair ties and is proudly worn by top Olympic athletes and everyday women.</p>
+        </div>
+      </div>
+      <div class="rail">
+        <img src="img/origin-runway.jpg" alt="Model on a fashion runway">
+        <img src="img/origin-visor.jpg" alt="Athlete with braided ponytail and visor">
+        <img src="img/origin-intro.jpg" alt="Introducing a customizable performance hair tie">
+      </div>
     </div>
   </section>
 
-  <!-- 08 · LEXICON -->
-  <section class="spread s08" data-theme-color="#141414">
-    <div class="numeral">08</div>
-    <p class="kicker">Words We Use / Words We Don't</p>
-    <div class="words">
-      <span class="word">[word]</span>
-      <span class="word">[word]</span>
-      <span class="word">[word]</span>
-      <span class="word no">[banned]</span>
-      <span class="word">[word]</span>
-      <span class="word no">[banned]</span>
-      <span class="word">[word]</span>
+  <!-- 05 · POSITIONING -->
+  <section class="spread">
+    <div class="prose">
+      <p class="part">Positioning</p>
+      <h1 class="title">[Placeholder — the one-sentence positioning statement lives here.]</h1>
+      <p class="subhead">[Placeholder — for whom, against what, and the single reason to believe.]</p>
     </div>
   </section>
 
-  <!-- 09 · SEAFOAM PROOF -->
-  <section class="spread s09" data-theme-color="#141414">
-    <div class="numeral">09</div>
-    <p class="kicker">Proof</p>
-    <blockquote style="margin-top:2rem;">[Placeholder — the single strongest customer quote or proof point.]</blockquote>
-    <cite>— [Name, context]</cite>
+  <!-- 06 · AUDIENCE -->
+  <section class="spread">
+    <div class="prose">
+      <p class="part">Who She Is</p>
+      <h1 class="title">[Audience headline]</h1>
+      <p class="subhead">[Placeholder — one italic line that captures her.]</p>
+      <div class="body-copy">
+        <p>[Placeholder — audience portrait. What she values, where she is (the studio, the field, the office), what she's tired of, what she notices.]</p>
+      </div>
+    </div>
   </section>
 
-  <!-- 10 · BIG STAT FINISH -->
-  <section class="spread s10" data-theme-color="#f6f1e7">
-    <p class="kicker">The Bottom Line</p>
-    <div class="stat">13×</div>
-    <p class="body-xl">[Placeholder — closing statement. The number that matters, and the promise it proves.]</p>
+  <!-- 07 · BRAND PILLARS -->
+  <section class="spread">
+    <div>
+      <p class="part">Brand Pillars</p>
+      <h1 class="title">What TIY stands on.</h1>
+      <div class="pillars">
+        <div class="pillar"><h3>[Pillar one]</h3><p>[Placeholder — what it means and how it shows up.]</p></div>
+        <div class="pillar"><h3>[Pillar two]</h3><p>[Placeholder — what it means and how it shows up.]</p></div>
+        <div class="pillar"><h3>[Pillar three]</h3><p>[Placeholder — what it means and how it shows up.]</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 · VOICE & TONE -->
+  <section class="spread">
+    <div class="prose">
+      <p class="part">Voice &amp; Tone</p>
+      <h1 class="title">[Placeholder — the voice in one line.]</h1>
+      <div class="voice-cols">
+        <div>
+          <h3>We are</h3>
+          <ul>
+            <li>[confident]</li>
+            <li>[playful]</li>
+            <li>[warm]</li>
+          </ul>
+        </div>
+        <div>
+          <h3>We are not</h3>
+          <ul>
+            <li>[precious]</li>
+            <li>[preachy]</li>
+            <li>[corporate]</li>
+          </ul>
+        </div>
+      </div>
+      <p class="subhead" style="margin-top:clamp(1.5rem,4vh,2.5rem);margin-bottom:0;">Say it like: "[placeholder example sentence]"</p>
+    </div>
+  </section>
+
+  <!-- 09 · LEXICON -->
+  <section class="spread">
+    <div>
+      <p class="part">Language</p>
+      <h1 class="title">Words we use.<br>Words we don't.</h1>
+      <div class="words">
+        <span class="word">[word]</span>
+        <span class="word">[word]</span>
+        <span class="word">[word]</span>
+        <span class="word no">[banned]</span>
+        <span class="word">[word]</span>
+        <span class="word no">[banned]</span>
+        <span class="word">[word]</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 · PROOF -->
+  <section class="spread">
+    <div class="prose">
+      <p class="part">Proof</p>
+      <blockquote class="quote">[Placeholder — the single strongest customer quote or proof point.]</blockquote>
+      <cite>— [Name, context]</cite>
+    </div>
+  </section>
+
+  <!-- 11 · BOTTOM LINE -->
+  <section class="spread center">
+    <p class="part">The Bottom Line</p>
+    <div class="stat"><b>13×</b> stronger.</div>
+    <p class="body-copy" style="max-width:30em;margin-top:1.5rem;">[Placeholder — closing statement. The number that matters, and the promise it proves.]</p>
     <p class="footer-note">TIY Products · Austin, Texas · MMXXVI</p>
   </section>
 
 </div>
 
 <div class="progress" id="progress"></div>
-<div class="counter" id="counter">01 / 10</div>
+<div class="counter" id="counter"></div>
 <div class="nav" id="nav">
-  <button id="prev" aria-label="Previous spread">&larr;</button>
-  <button id="next" aria-label="Next spread">&rarr;</button>
+  <button id="prev" aria-label="Previous page">&larr;</button>
+  <button id="next" aria-label="Next page">&rarr;</button>
 </div>
 
 <script>
@@ -276,19 +303,14 @@
   const spreads=[...document.querySelectorAll('.spread')];
   const prev=document.getElementById('prev'),next=document.getElementById('next');
   const counter=document.getElementById('counter'),progress=document.getElementById('progress');
-  const nav=document.getElementById('nav');
   let i=0;
-
-  function pad(n){return String(n+1).padStart(2,'0');}
+  function pad(n){return String(n).padStart(2,'0');}
   function show(n){
     i=Math.max(0,Math.min(spreads.length-1,n));
     spreads.forEach((s,k)=>s.classList.toggle('active',k===i));
-    counter.textContent=pad(i)+' / '+String(spreads.length).padStart(2,'0');
+    counter.textContent=pad(i+1)+' / '+pad(spreads.length);
     progress.style.width=((i+1)/spreads.length*100)+'%';
     prev.disabled=(i===0);next.disabled=(i===spreads.length-1);
-    const c=spreads[i].getAttribute('data-theme-color')||'#141414';
-    [counter,progress,nav].forEach(el=>el.style.color=c);
-    progress.style.background=c;
     location.hash='p'+(i+1);
   }
   prev.addEventListener('click',()=>show(i-1));
@@ -299,7 +321,6 @@
     if(e.key==='Home')show(0);
     if(e.key==='End')show(spreads.length-1);
   });
-  // touch swipe
   let x0=null;
   document.addEventListener('touchstart',e=>{x0=e.touches[0].clientX;},{passive:true});
   document.addEventListener('touchend',e=>{
@@ -308,7 +329,6 @@
     if(Math.abs(dx)>60)show(dx<0?i+1:i-1);
     x0=null;
   },{passive:true});
-
   const h=parseInt((location.hash||'').replace('#p',''),10);
   show(isNaN(h)?0:h-1);
 })();
