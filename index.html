@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TIY — Brand Strategy &amp; Messaging Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#141414;
+    --cream:#f6f1e7;
+    --midnight:#10131f;
+    --rose:#e94f64;
+    --terminal-bg:#0b1508;
+    --terminal-green:#7dff8a;
+    --mustard:#f2b705;
+    --seafoam:#bfe8d9;
+    --bubblegum:#f7c8d8;
+    --paper:#fbf8f2;
+    --violet:#4b3bbd;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{height:100%;overflow:hidden;}
+  body{font-family:'Poppins',sans-serif;color:var(--ink);background:var(--ink);}
+
+  .deck{position:relative;height:100dvh;width:100vw;}
+  .spread{
+    position:absolute;inset:0;
+    display:none;
+    padding:clamp(2rem,6vw,6rem);
+    overflow-y:auto;
+  }
+  .spread.active{display:flex;flex-direction:column;justify-content:center;animation:fadeUp .55s ease both;}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:none;}}
+
+  /* ---- global type scale: nothing small ---- */
+  .kicker{font-size:clamp(1.1rem,1.6vw,1.5rem);font-weight:700;letter-spacing:.25em;text-transform:uppercase;}
+  .display{font-size:clamp(3.2rem,9vw,8.5rem);font-weight:900;line-height:.95;letter-spacing:-.02em;}
+  .display-md{font-size:clamp(2.4rem,6vw,5.5rem);font-weight:800;line-height:1.02;letter-spacing:-.015em;}
+  .body-xl{font-size:clamp(1.4rem,2.4vw,2.1rem);font-weight:400;line-height:1.45;max-width:26em;}
+  .body-lg{font-size:clamp(1.25rem,2vw,1.7rem);font-weight:400;line-height:1.5;max-width:30em;}
+  .numeral{font-weight:900;line-height:1;user-select:none;}
+
+  /* ---- navigation ---- */
+  .nav{
+    position:fixed;bottom:clamp(1.2rem,3vw,2.5rem);right:clamp(1.2rem,3vw,2.5rem);
+    display:flex;align-items:center;gap:1rem;z-index:50;
+  }
+  .nav button{
+    width:clamp(3.4rem,5vw,4.2rem);height:clamp(3.4rem,5vw,4.2rem);
+    border-radius:50%;border:3px solid currentColor;background:transparent;
+    color:inherit;font-size:1.6rem;font-weight:700;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;transition:transform .15s ease;
+    font-family:'Poppins',sans-serif;
+  }
+  .nav button:hover{transform:scale(1.08);}
+  .nav button:disabled{opacity:.25;cursor:default;transform:none;}
+  .counter{
+    position:fixed;bottom:clamp(1.4rem,3vw,2.7rem);left:clamp(1.2rem,3vw,2.5rem);
+    font-size:clamp(1.1rem,1.5vw,1.4rem);font-weight:700;letter-spacing:.15em;z-index:50;
+  }
+  .progress{
+    position:fixed;top:0;left:0;height:6px;background:currentColor;z-index:60;
+    transition:width .4s ease;
+  }
+
+  /* ================= 01 · HERO COVER ================= */
+  .s01{background:var(--cream);color:var(--ink);}
+  .s01 .numeral{
+    position:absolute;top:-2rem;right:-1rem;font-size:clamp(14rem,32vw,32rem);
+    color:transparent;-webkit-text-stroke:3px var(--ink);opacity:.14;
+  }
+  .s01 .title{font-size:clamp(4rem,13vw,12rem);font-weight:900;line-height:.9;letter-spacing:-.03em;}
+  .s01 .title em{font-style:italic;font-weight:300;}
+  .s01 .rule{width:clamp(8rem,20vw,18rem);height:8px;background:var(--rose);margin:2.5rem 0;}
+
+  /* ================= 02 · MIDNIGHT / ORIGIN ================= */
+  .s02{background:var(--midnight);color:var(--cream);}
+  .s02 .numeral{font-size:clamp(8rem,18vw,16rem);color:var(--rose);margin-bottom:1rem;}
+  .s02 .display-md em{color:var(--rose);font-style:normal;}
+
+  /* ================= 03 · ROSE ALERT STAMP ================= */
+  .s03{background:var(--rose);color:#fff;align-items:center;text-align:center;}
+  .s03 .stamp{
+    display:inline-block;border:6px solid #fff;padding:1rem 3rem;
+    transform:rotate(-4deg);font-size:clamp(1.4rem,2.4vw,2.2rem);
+    font-weight:800;letter-spacing:.3em;text-transform:uppercase;margin-bottom:3rem;
+  }
+  .s03 .body-xl{margin:0 auto;}
+  .s03 .numeral{
+    position:absolute;bottom:-3rem;left:-1rem;font-size:clamp(12rem,26vw,26rem);
+    color:transparent;-webkit-text-stroke:3px rgba(255,255,255,.35);
+  }
+
+  /* ================= 04 · SPLIT PANEL / AUDIENCE ================= */
+  .s04{background:var(--violet);color:#fff;padding:0;}
+  .s04 .cols{display:grid;grid-template-columns:1fr 1fr;min-height:100%;}
+  .s04 .col{padding:clamp(2rem,5vw,5rem);display:flex;flex-direction:column;justify-content:center;}
+  .s04 .col.b{background:var(--cream);color:var(--ink);}
+  .s04 .numeral{font-size:clamp(6rem,12vw,11rem);opacity:.9;}
+  @media(max-width:760px){.s04 .cols{grid-template-columns:1fr;}}
+
+  /* ================= 05 · MUSTARD PILLARS ================= */
+  .s05{background:var(--mustard);color:var(--ink);}
+  .s05 .pillars{display:grid;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));gap:2rem;margin-top:3rem;}
+  .s05 .pillar{border-top:8px solid var(--ink);padding-top:1.2rem;}
+  .s05 .pillar h3{font-size:clamp(1.7rem,2.8vw,2.6rem);font-weight:800;line-height:1.1;margin-bottom:.6rem;}
+  .s05 .pillar p{font-size:clamp(1.2rem,1.7vw,1.5rem);line-height:1.45;}
+  .s05 .numeral{font-size:clamp(5rem,10vw,9rem);}
+
+  /* ================= 06 · TERMINAL / VOICE ================= */
+  .s06{background:var(--terminal-bg);color:var(--terminal-green);font-family:'JetBrains Mono',monospace;}
+  .s06 .prompt::before{content:'> ';}
+  .s06 .line{font-size:clamp(1.4rem,2.6vw,2.3rem);font-weight:700;line-height:1.7;}
+  .s06 .big{font-size:clamp(2.6rem,6.5vw,6rem);font-weight:700;line-height:1.05;margin:1.5rem 0;}
+  .s06 .cursor{display:inline-block;width:.6em;height:1.1em;background:var(--terminal-green);vertical-align:text-bottom;animation:blink 1s steps(1) infinite;}
+  @keyframes blink{50%{opacity:0;}}
+  .s06 .kicker{font-family:'JetBrains Mono',monospace;}
+
+  /* ================= 07 · ACADEMIC DROP CAP ================= */
+  .s07{background:var(--paper);color:var(--ink);}
+  .s07 .dropcap-block{columns:1;max-width:60rem;}
+  .s07 .dropcap-block p{font-size:clamp(1.4rem,2.2vw,1.9rem);line-height:1.6;}
+  .s07 .dropcap-block p:first-of-type::first-letter{
+    font-size:clamp(6rem,12vw,10rem);font-weight:900;float:left;
+    line-height:.8;padding-right:1.4rem;color:var(--rose);
+  }
+  .s07 .numeral{font-size:clamp(4rem,8vw,7rem);color:var(--rose);}
+  .s07 hr{border:none;border-top:4px double var(--ink);margin:2rem 0;max-width:60rem;}
+
+  /* ================= 08 · LEXICON / BUBBLEGUM ================= */
+  .s08{background:var(--bubblegum);color:var(--ink);}
+  .s08 .words{display:flex;flex-wrap:wrap;gap:1.2rem 2rem;margin-top:2.5rem;max-width:70rem;}
+  .s08 .word{font-size:clamp(2rem,4.5vw,4rem);font-weight:800;line-height:1;}
+  .s08 .word.no{color:transparent;-webkit-text-stroke:2px var(--ink);text-decoration:line-through;text-decoration-color:var(--rose);text-decoration-thickness:6px;}
+  .s08 .numeral{font-size:clamp(5rem,10vw,9rem);color:#fff;}
+
+  /* ================= 09 · SEAFOAM PROOF ================= */
+  .s09{background:var(--seafoam);color:var(--ink);}
+  .s09 blockquote{font-size:clamp(2rem,4.5vw,4rem);font-weight:700;line-height:1.2;max-width:22em;}
+  .s09 blockquote::before{content:'“';color:var(--rose);}
+  .s09 blockquote::after{content:'”';color:var(--rose);}
+  .s09 cite{display:block;font-style:normal;font-size:clamp(1.2rem,1.8vw,1.6rem);font-weight:600;margin-top:2rem;letter-spacing:.1em;text-transform:uppercase;}
+  .s09 .numeral{font-size:clamp(5rem,10vw,9rem);opacity:.35;}
+
+  /* ================= 10 · BIG STAT FINISH ================= */
+  .s10{background:var(--ink);color:var(--cream);align-items:center;text-align:center;}
+  .s10 .stat{font-size:clamp(7rem,22vw,22rem);font-weight:900;line-height:.9;color:var(--mustard);letter-spacing:-.04em;}
+  .s10 .body-xl{margin:2rem auto 0;}
+  .s10 .footer-note{margin-top:4rem;font-size:clamp(1.1rem,1.5vw,1.4rem);font-weight:600;letter-spacing:.2em;text-transform:uppercase;opacity:.7;}
+</style>
+</head>
+<body>
+<div class="deck" id="deck">
+
+  <!-- 01 · HERO COVER -->
+  <section class="spread s01" data-theme-color="#141414">
+    <div class="numeral">01</div>
+    <p class="kicker">Brand Strategy &amp; Messaging Guide</p>
+    <h1 class="title">TIY<br><em>tie it</em><br>YOURSELF.</h1>
+    <div class="rule"></div>
+    <p class="body-xl">[Placeholder — one-line framing of what this guide is and who it's for. Prepared for TIY Products, Austin, Texas.]</p>
+  </section>
+
+  <!-- 02 · MIDNIGHT ORIGIN -->
+  <section class="spread s02" data-theme-color="#f6f1e7">
+    <div class="numeral">02</div>
+    <p class="kicker">The Story</p>
+    <h2 class="display-md">[Placeholder header — <em>the origin story</em>, the problem worth solving, why TIY exists.]</h2>
+    <p class="body-lg" style="margin-top:2rem;">[Placeholder — 2–3 sentences of origin narrative. The founding insight, the moment of frustration with the disposable hair tie, the Austin roots.]</p>
+  </section>
+
+  <!-- 03 · ROSE ALERT STAMP -->
+  <section class="spread s03" data-theme-color="#ffffff">
+    <div class="numeral">03</div>
+    <div><span class="stamp">Positioning</span></div>
+    <h2 class="display-md">[Placeholder — the one-sentence positioning statement lives here, huge.]</h2>
+    <p class="body-xl" style="margin-top:2.5rem;">[Placeholder — for whom, against what, and the single reason to believe.]</p>
+  </section>
+
+  <!-- 04 · SPLIT PANEL AUDIENCE -->
+  <section class="spread s04" data-theme-color="#ffffff">
+    <div class="cols">
+      <div class="col">
+        <div class="numeral">04</div>
+        <p class="kicker">Who She Is</p>
+        <h2 class="display-md" style="margin-top:1rem;">[Audience headline]</h2>
+      </div>
+      <div class="col b">
+        <p class="body-lg">[Placeholder — audience portrait. What she values, where she is (the studio, the field, the office), what she's tired of, what she notices.]</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 · MUSTARD PILLARS -->
+  <section class="spread s05" data-theme-color="#141414">
+    <div class="numeral">05</div>
+    <p class="kicker">Brand Pillars</p>
+    <div class="pillars">
+      <div class="pillar"><h3>[Pillar one]</h3><p>[Placeholder — what it means and how it shows up.]</p></div>
+      <div class="pillar"><h3>[Pillar two]</h3><p>[Placeholder — what it means and how it shows up.]</p></div>
+      <div class="pillar"><h3>[Pillar three]</h3><p>[Placeholder — what it means and how it shows up.]</p></div>
+    </div>
+  </section>
+
+  <!-- 06 · TERMINAL VOICE -->
+  <section class="spread s06" data-theme-color="#7dff8a">
+    <p class="kicker prompt">spread_06 / voice_and_tone</p>
+    <p class="big">[Placeholder — the voice in one line. How TIY sounds when it speaks.]</p>
+    <p class="line prompt">we_are: [confident / playful / warm]</p>
+    <p class="line prompt">we_are_not: [precious / preachy / corporate]</p>
+    <p class="line prompt">say_it_like: "[placeholder example sentence]"</p>
+    <p class="line">&nbsp;<span class="cursor"></span></p>
+  </section>
+
+  <!-- 07 · ACADEMIC DROP CAP -->
+  <section class="spread s07" data-theme-color="#141414">
+    <div class="numeral">07</div>
+    <p class="kicker">Messaging Hierarchy</p>
+    <hr>
+    <div class="dropcap-block">
+      <p>[Placeholder — lead paragraph explaining the message architecture: the master message, then supporting messages by audience or moment. The first letter of this paragraph becomes the drop cap, so start it with a strong word.]</p>
+      <p style="margin-top:1.5rem;">[Placeholder — second paragraph: how the messages ladder up, and when to use which.]</p>
+    </div>
+  </section>
+
+  <!-- 08 · LEXICON -->
+  <section class="spread s08" data-theme-color="#141414">
+    <div class="numeral">08</div>
+    <p class="kicker">Words We Use / Words We Don't</p>
+    <div class="words">
+      <span class="word">[word]</span>
+      <span class="word">[word]</span>
+      <span class="word">[word]</span>
+      <span class="word no">[banned]</span>
+      <span class="word">[word]</span>
+      <span class="word no">[banned]</span>
+      <span class="word">[word]</span>
+    </div>
+  </section>
+
+  <!-- 09 · SEAFOAM PROOF -->
+  <section class="spread s09" data-theme-color="#141414">
+    <div class="numeral">09</div>
+    <p class="kicker">Proof</p>
+    <blockquote style="margin-top:2rem;">[Placeholder — the single strongest customer quote or proof point.]</blockquote>
+    <cite>— [Name, context]</cite>
+  </section>
+
+  <!-- 10 · BIG STAT FINISH -->
+  <section class="spread s10" data-theme-color="#f6f1e7">
+    <p class="kicker">The Bottom Line</p>
+    <div class="stat">[13×]</div>
+    <p class="body-xl">[Placeholder — closing statement. The number that matters, and the promise it proves.]</p>
+    <p class="footer-note">TIY Products · Austin, Texas · MMXXVI</p>
+  </section>
+
+</div>
+
+<div class="progress" id="progress"></div>
+<div class="counter" id="counter">01 / 10</div>
+<div class="nav" id="nav">
+  <button id="prev" aria-label="Previous spread">&larr;</button>
+  <button id="next" aria-label="Next spread">&rarr;</button>
+</div>
+
+<script>
+(function(){
+  const spreads=[...document.querySelectorAll('.spread')];
+  const prev=document.getElementById('prev'),next=document.getElementById('next');
+  const counter=document.getElementById('counter'),progress=document.getElementById('progress');
+  const nav=document.getElementById('nav');
+  let i=0;
+
+  function pad(n){return String(n+1).padStart(2,'0');}
+  function show(n){
+    i=Math.max(0,Math.min(spreads.length-1,n));
+    spreads.forEach((s,k)=>s.classList.toggle('active',k===i));
+    counter.textContent=pad(i)+' / '+String(spreads.length).padStart(2,'0');
+    progress.style.width=((i+1)/spreads.length*100)+'%';
+    prev.disabled=(i===0);next.disabled=(i===spreads.length-1);
+    const c=spreads[i].getAttribute('data-theme-color')||'#141414';
+    [counter,progress,nav].forEach(el=>el.style.color=c);
+    progress.style.background=c;
+    location.hash='p'+(i+1);
+  }
+  prev.addEventListener('click',()=>show(i-1));
+  next.addEventListener('click',()=>show(i+1));
+  document.addEventListener('keydown',e=>{
+    if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' ')show(i+1);
+    if(e.key==='ArrowLeft'||e.key==='PageUp')show(i-1);
+    if(e.key==='Home')show(0);
+    if(e.key==='End')show(spreads.length-1);
+  });
+  // touch swipe
+  let x0=null;
+  document.addEventListener('touchstart',e=>{x0=e.touches[0].clientX;},{passive:true});
+  document.addEventListener('touchend',e=>{
+    if(x0===null)return;
+    const dx=e.changedTouches[0].clientX-x0;
+    if(Math.abs(dx)>60)show(dx<0?i+1:i-1);
+    x0=null;
+  },{passive:true});
+
+  const h=parseInt((location.hash||'').replace('#p',''),10);
+  show(isNaN(h)?0:h-1);
+})();
+</script>
+</body>
+</html>
