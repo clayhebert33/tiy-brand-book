@@ -17,6 +17,7 @@
   *{margin:0;padding:0;box-sizing:border-box;}
   html,body{height:100%;overflow:hidden;}
   body{font-family:'Poppins',sans-serif;color:var(--ink);background:var(--bg);}
+  @media (max-height:800px){html{font-size:14px;}}
   @media (max-height:700px){html{font-size:13px;}}
   img{display:block;width:100%;height:auto;}
 
@@ -58,6 +59,7 @@
     height:calc(100dvh - clamp(2rem,5vw,5rem) - clamp(6rem,12vh,8rem));
   }
   .rail img{flex:1 1 0;min-height:0;width:100%;height:100%;object-fit:cover;}
+  .rail img.contain{object-fit:contain;object-position:center top;background:#fff;}
   @media (max-width:840px){
     .cols{grid-template-columns:1fr;}
     .rail{height:auto;flex-direction:row;flex-wrap:wrap;}
@@ -176,7 +178,7 @@
       </div>
       <div class="rail">
         <img src="img/origin-beach.jpg" alt="Andrea Nucete diving for a ball on the beach">
-        <img src="img/origin-quote.jpg" alt="Andrea and Jerritt — 'I don't trust the bald guy' quote">
+        <img src="img/origin-quote.jpg" class="contain" style="flex:1.7 1 0;" alt="Andrea and Jerritt — 'I don't trust the bald guy' quote">
       </div>
     </div>
   </section>
