@@ -30,9 +30,11 @@
     position:absolute;inset:0;
     display:none;
     padding:clamp(2rem,6vw,6rem);
-    overflow-y:auto;
+    padding-bottom:clamp(6rem,12vh,9rem);
+    overflow-y:auto;overflow-x:hidden;
   }
-  .spread.active{display:flex;flex-direction:column;justify-content:center;animation:fadeUp .55s ease both;}
+  .spread.active{display:flex;flex-direction:column;justify-content:center;}
+  .spread.active>*{animation:fadeUp .5s ease both;}
   @keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:none;}}
 
   /* ---- global type scale: nothing small ---- */
@@ -69,8 +71,9 @@
   /* ================= 01 · HERO COVER ================= */
   .s01{background:var(--cream);color:var(--ink);}
   .s01 .numeral{
-    position:absolute;top:-2rem;right:-1rem;font-size:clamp(14rem,32vw,32rem);
-    color:transparent;-webkit-text-stroke:3px var(--ink);opacity:.14;
+    position:absolute;top:0;right:0;font-size:clamp(12rem,26vw,26rem);
+    color:transparent;-webkit-text-stroke:3px var(--ink);opacity:.12;
+    animation:none !important;
   }
   .s01 .title{font-size:clamp(4rem,13vw,12rem);font-weight:900;line-height:.9;letter-spacing:-.03em;}
   .s01 .title em{font-style:italic;font-weight:300;}
@@ -90,8 +93,9 @@
   }
   .s03 .body-xl{margin:0 auto;}
   .s03 .numeral{
-    position:absolute;bottom:-3rem;left:-1rem;font-size:clamp(12rem,26vw,26rem);
-    color:transparent;-webkit-text-stroke:3px rgba(255,255,255,.35);
+    position:absolute;bottom:-2rem;right:0;font-size:clamp(10rem,22vw,22rem);
+    color:transparent;-webkit-text-stroke:3px rgba(255,255,255,.25);
+    animation:none !important;
   }
 
   /* ================= 04 · SPLIT PANEL / AUDIENCE ================= */
@@ -221,7 +225,7 @@
     <p class="kicker">Messaging Hierarchy</p>
     <hr>
     <div class="dropcap-block">
-      <p>[Placeholder — lead paragraph explaining the message architecture: the master message, then supporting messages by audience or moment. The first letter of this paragraph becomes the drop cap, so start it with a strong word.]</p>
+      <p>Placeholder — lead paragraph explaining the message architecture: the master message, then supporting messages by audience or moment. The first letter of this paragraph becomes the drop cap, so start it with a strong word.</p>
       <p style="margin-top:1.5rem;">[Placeholder — second paragraph: how the messages ladder up, and when to use which.]</p>
     </div>
   </section>
@@ -252,7 +256,7 @@
   <!-- 10 · BIG STAT FINISH -->
   <section class="spread s10" data-theme-color="#f6f1e7">
     <p class="kicker">The Bottom Line</p>
-    <div class="stat">[13×]</div>
+    <div class="stat">13×</div>
     <p class="body-xl">[Placeholder — closing statement. The number that matters, and the promise it proves.]</p>
     <p class="footer-note">TIY Products · Austin, Texas · MMXXVI</p>
   </section>
